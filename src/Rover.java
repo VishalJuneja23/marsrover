@@ -9,53 +9,76 @@ public class Rover {
     this.headingTowards = headingTowards;
   }
 
-  public char turn(char turnCommand) {
-    if (turnCommand == 'R') {
-      return turnRight90Deg();
-    }
-    return turnLeft90Deg();
-  }
 
-  public int[] move(char command) {
-    int[] coordinates = new int[2];
-    coordinates[0] = coordinateX;
-    coordinates[1] = coordinateY;
-
-    if (command == 'M') {
-      if (headingTowards == 'N') {
-        coordinates[1]++;
-      } else if (headingTowards == 'E') {
-        coordinates[0]++;
-      } else if (headingTowards == 'S') {
-        coordinates[1]--;
-      } else if (headingTowards == 'W') {
-        coordinates[0]--;
+  public String commands(String input) {
+    char[] inputCharacterArray = input.toCharArray();
+    StringBuilder finalPositionAndDirection = new StringBuilder();
+    for (int i = 0; i < inputCharacterArray.length; i++) {
+      if (inputCharacterArray[i] != 'M') {
+        turn(inputCharacterArray[i]);
+      } else if (inputCharacterArray[i] == 'M') {
+         move();
       }
     }
-    return coordinates;
+
+    return finalPosition(finalPositionAndDirection);
+  }
+
+  private String finalPosition(StringBuilder finalPositionAndDirection) {
+    finalPositionAndDirection.append(coordinateX);
+    finalPositionAndDirection.append(" ");
+    finalPositionAndDirection.append(coordinateY);
+    finalPositionAndDirection.append(" ");
+    finalPositionAndDirection.append(headingTowards);
+    return finalPositionAndDirection.toString();
   }
 
 
-  private char turnRight90Deg() {
+  private void turn(char turnCommand) {
+    if (turnCommand == 'R') {
+      turnRight90Deg();
+    }
+    else if (turnCommand == 'L'){
+      turnLeft90Deg();
+    }
+  }
+
+  private void move() {
+      if (headingTowards == 'N') {
+        coordinateY++;
+      } else if (headingTowards == 'E') {
+        coordinateX++;
+      } else if (headingTowards == 'S') {
+        coordinateY--;
+      } else if (headingTowards == 'W') {
+        coordinateX--;
+      }
+    }
+
+
+
+  private void turnRight90Deg() {
     if (headingTowards == 'N') {
-      return 'E';
+      headingTowards = 'E';
     } else if (headingTowards == 'E') {
-      return 'S';
+      headingTowards = 'S';
     } else if (headingTowards == 'S') {
-      return 'W';
+      headingTowards ='W';
+    } else if(headingTowards == 'W'){
+      headingTowards = 'N';
     }
-    return 'N';
   }
 
-  private char turnLeft90Deg() {
+  private void turnLeft90Deg() {
     if (headingTowards == 'N') {
-      return 'W';
+      this.headingTowards = 'W';
     } else if (headingTowards == 'W') {
-      return 'S';
+      this.headingTowards ='S';
     } else if (headingTowards == 'S') {
-      return 'E';
+      this.headingTowards = 'E';
+    }else if(headingTowards == 'E') {
+      this.headingTowards = 'N';
     }
-    return 'N';
   }
 }
 
