@@ -59,4 +59,40 @@ public class RoverTest {
     assertEquals(expectedResult, rover.turn('L'));
   }
 
+  @Test
+  public void expectX2Y1ForStartingCoordinatesX1Y1FacingEAndTurnCommandIsM() {
+    Rover rover = new Rover(1, 1, 'E');
+    int[] expectedResult = new int[2];
+    expectedResult[0] = 2;
+    expectedResult[1] = 1;
+    assertArrayEquals(expectedResult,rover.move('M'));
+  }
+  @Test
+  public void expectX2Y2ForStartingCoordinatesX2Y1FacingNAndTurnCommandIsM() {
+    Rover rover = new Rover(2, 1, 'N');
+    int[] expectedResult = new int[2];
+    expectedResult[0] = 2;
+    expectedResult[1] = 2;
+    assertArrayEquals(expectedResult,rover.move('M'));
+  }
+
+  @Test
+  public void expectX0Y1ForStartingCoordinatesX1Y1FacingWAndTurnCommandIsM() {
+    Rover rover = new Rover(1, 1, 'W');
+    int[] expectedResult = new int[2];
+    expectedResult[0] = 0;
+    expectedResult[1] = 1;
+    assertArrayEquals(expectedResult,rover.move('M'));
+  }
+
+  @Test
+  public void expectX3Y2ForStartingCoordinatesX3Y3FacingSAndTurnCommandIsM() {
+    Rover rover = new Rover(3, 3, 'S');
+    int[] expectedResult = new int[2];
+    expectedResult[0] = 3;
+    expectedResult[1] = 2;
+    assertArrayEquals(expectedResult,rover.move('M'));
+  }
+
+
 }
