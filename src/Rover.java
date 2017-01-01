@@ -11,9 +11,9 @@ public class Rover {
 
   public char turn(char turnCommand) {
     if (turnCommand == 'R') {
-      headingTowards = turnRight90Deg();
+      return turnRight90Deg();
     }
-    return headingTowards;
+    return turnLeft90Deg();
   }
 
   private char turnRight90Deg() {
@@ -23,6 +23,17 @@ public class Rover {
       return 'S';
     } else if (headingTowards == 'S') {
       return 'W';
+    }
+    return 'N';
+  }
+
+  private char turnLeft90Deg() {
+    if (headingTowards == 'N') {
+      return 'W';
+    } else if (headingTowards == 'W') {
+      return 'S';
+    } else if (headingTowards == 'S') {
+      return 'E';
     }
     return 'N';
   }
